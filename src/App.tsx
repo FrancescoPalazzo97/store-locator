@@ -1,42 +1,25 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Header } from "./components/layout/Header";
+import { Footer } from "./components/layout/Footer";
+import { HomePage } from "./pages/HomPage";
+import { StoreDetailsPage } from "./pages/StoreDetailsPage";
+
 export const App = () => {
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 py-4">
-          <h1 className="text-2xl font-bold text-gray-900">
-            🏪 Store Locator
-          </h1>
-        </div>
-      </header>
+    <BrowserRouter>
+      <div>
+        <Header />
 
-      {/* Main content */}
-      <main className="max-w-7xl mx-auto px-4 py-8">
-        <div className="card">
-          <h2 className="text-xl font-semibold mb-4">
-            Benvenuto in Store Locator
-          </h2>
-          <p className="text-gray-600 mb-4">
-            Trova i punti vendita più vicini a te.
-          </p>
-          <div className="flex gap-2">
-            <button className="btn btn-primary">
-              Cerca negozi
-            </button>
-            <button className="btn btn-secondary">
-              Vedi mappa
-            </button>
-          </div>
-        </div>
-      </main>
+        <main>
+          <Routes>
+            <Route index element={<HomePage />} />
+            <Route path="/store/:id" element={<StoreDetailsPage />} />
+          </Routes>
+        </main>
 
-      {/* Footer */}
-      <footer className="bg-white border-t mt-auto">
-        <div className="max-w-7xl mx-auto px-4 py-4 text-center text-gray-500">
-          © 2026 Store Locator
-        </div>
-      </footer>
-    </div>
+        <Footer />
+      </div>
+    </BrowserRouter>
   )
 }
