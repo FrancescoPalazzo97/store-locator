@@ -1,34 +1,21 @@
-export type Store = {
-    id: number;
-    nome: string;
-    indirizzo: string;
-    città: string;
-    latitudine: number;
-    longitudine: number;
-    telefono: string | null;
-    totem: boolean;
-}
+import type z from "zod";
+import {
+    citiesResponseSchema,
+    citySchema,
+    paginationSchema,
+    storeSchema,
+    storesResponseSchema
+} from "../schemas/store.schema";
 
-export type City = {
-    città: string;
-    count: number;
-}
+export type Store = z.infer<typeof storeSchema>;
 
-export type Pagination = {
-    currentPage: number;
-    totalPages: number;
-    totalItems: number;
-    itemsPerPage: number;
-}
+export type City = z.infer<typeof citySchema>;
 
-export type StoresResponse = {
-    stores: Store[];
-    pagination: Pagination;
-}
+export type Pagination = z.infer<typeof paginationSchema>;
 
-export type CitiesResponse = {
-    cities: City[];
-}
+export type StoresResponse = z.infer<typeof storesResponseSchema>;
+
+export type CitiesResponse = z.infer<typeof citiesResponseSchema>;
 
 export type ApiSuccessResponse<T> = {
     success: true;
