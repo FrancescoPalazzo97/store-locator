@@ -121,7 +121,7 @@ export const StoreDetailsPage = () => {
                 </div>
 
                 {/* Mappa placeholder */}
-                <div className="w-full lg:w-1/2 h-80 lg:h-auto min-h-[300px] bg-gray-200 rounded-lg flex items-center justify-center">
+                <div className="w-full lg:w-1/2 h-80 lg:h-auto min-h-75 bg-gray-200 rounded-lg flex items-center justify-center">
                     <div className="text-center text-gray-500">
                         <p className="text-4xl mb-2">🗺️</p>
                         <p>Leaflet Map</p>
