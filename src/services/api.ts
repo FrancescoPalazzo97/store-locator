@@ -2,7 +2,7 @@ import type {
     ApiResponse,
     StoresResponse,
     CitiesResponse,
-    Store
+    Store,
 } from "../types/store.types";
 import { env } from "../env";
 
@@ -13,16 +13,16 @@ const fetchApi = async <T>(endpoint: string): Promise<ApiResponse<T>> => {
         const res = await fetch(`${API_URL}${endpoint}`);
         const data = await res.json();
         return data as ApiResponse<T>;
-    } catch (error) {
+    } catch {
         return {
             success: false,
             error: {
                 code: "NETWORK_ERROR",
                 message: "Errore di connessione al server",
-            }
-        }
+            },
+        };
     }
-}
+};
 
 export type GetStoresParams = {
     città?: string;
@@ -33,32 +33,32 @@ export type GetStoresParams = {
 };
 
 export const getStores = async (
-    params?: GetStoresParams
+    params?: GetStoresParams,
 ): Promise<ApiResponse<StoresResponse>> => {
     const searchParams = new URLSearchParams();
 
-    if (params?.città) searchParams.set('città', params.città);
-    if (params?.nome) searchParams.set('nome', params.nome);
-    if (params?.totem !== undefined) searchParams.set('totem', String(params.totem));
-    if (params?.page) searchParams.set('page', String(params.page));
-    if (params?.limit) searchParams.set('limit', String(params.limit));
+    if (params?.città) searchParams.set("città", params.città);
+    if (params?.nome) searchParams.set("nome", params.nome);
+    if (params?.totem !== undefined)
+        searchParams.set("totem", String(params.totem));
+    if (params?.page) searchParams.set("page", String(params.page));
+    if (params?.limit) searchParams.set("limit", String(params.limit));
 
     const queryString = searchParams.toString();
-    const endpoint = `/stores${queryString ? `?${queryString}` : ''}`;
+    const endpoint = `/stores${queryString ? `?${queryString}` : ""}`;
 
     return fetchApi<StoresResponse>(endpoint);
-}
+};
 
-export const getStoreById = async (
-    id: number
-): Promise<ApiResponse<Store>> => fetchApi<Store>(`/stores/${id}`);
+export const getStoreById = async (id: number): Promise<ApiResponse<Store>> =>
+    fetchApi<Store>(`/stores/${id}`);
 
 export const getCities = async (): Promise<ApiResponse<CitiesResponse>> => {
-    return fetchApi<CitiesResponse>('/stores/cities');
-}
+    return fetchApi<CitiesResponse>("/stores/cities");
+};
 
 export const healthCheck = async (): Promise<
-    ApiResponse<{ status: string, timespamp: string }>
+    ApiResponse<{ status: string; timespamp: string }>
 > => {
-    return fetchApi('/health');
-}
+    return fetchApi("/health");
+};
