@@ -2,7 +2,6 @@ import { useMemo } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { Link } from "react-router-dom";
 import L from 'leaflet';
-import type { Store } from "../../types/store.types";
 import { FitBounds } from "./FitBounds";
 import {
     ITALY_CENTER,
@@ -10,12 +9,8 @@ import {
     TILE_URL,
     TILE_ATTRIBUTION
 } from "../../constants/mapConstants";
+import { useStoreLocator } from "../../stores/useStoreLocator";
 
-type StoreMapProps = {
-    stores: Store[];
-    highlightedStoreId: number | null;
-    onMarkerClick?: (storeId: number) => void
-}
 
 const defaultIcon = new L.Icon({
     iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
@@ -37,7 +32,11 @@ const highlightedIcon = new L.Icon({
     shadowSize: [41, 41],
 });
 
-export const StoreMap = ({ stores, highlightedStoreId, onMarkerClick }: StoreMapProps) => {
+export const StoreMap = () => {
+    const stores = useStoreLocator(s => s.stores);
+    const highlightedStoreId = useStoreLocator(s => s.highlightedStoreId);
+    const setHighlightedStore = useStoreLocator(s => s.setHighlightedStore);
+
     const bounds = useMemo(() => {
         if (stores.length === 0) return null;
 
@@ -66,7 +65,7 @@ export const StoreMap = ({ stores, highlightedStoreId, onMarkerClick }: StoreMap
                     position={[store.latitudine, store.longitudine]}
                     icon={store.id === highlightedStoreId ? highlightedIcon : defaultIcon}
                     eventHandlers={{
-                        click: () => onMarkerClick?.(store.id),
+                        click: () => setHighlightedStore(store.id),
                     }}
                 >
                     <Popup>
@@ -88,7 +87,8 @@ export const StoreMap = ({ stores, highlightedStoreId, onMarkerClick }: StoreMap
                         </div>
                     </Popup>
                 </Marker>
-            ))}
-        </MapContainer>
+            ))
+            }
+        </MapContainer >
     );
 };

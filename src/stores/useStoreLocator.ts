@@ -50,6 +50,8 @@ const initialState = {
 
 type StoreLocator = StoreLocatorState & StoreLocatorActions;
 
+let searchDebounceTimer: ReturnType<typeof setTimeout>;
+
 export const useStoreLocator = create<StoreLocator>((set, get) => ({
     ...initialState,
 
@@ -114,7 +116,11 @@ export const useStoreLocator = create<StoreLocator>((set, get) => ({
     },
 
     setSearchQuery: (query) => {
-        set({ searchQuery: query });
+        set({ searchQuery: query, currentPage: 1 });
+        clearTimeout(searchDebounceTimer);
+        searchDebounceTimer = setTimeout(() => {
+            get().fetchStores();
+        }, 400);
     },
 
     setHighlightedStore: (id) => {
