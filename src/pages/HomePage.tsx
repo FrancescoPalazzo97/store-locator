@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useStoreLocator } from "../stores/useStoreLocator"
 import { Loader } from "../components/common/Loader";
 import { Link } from "react-router-dom";
@@ -18,10 +18,24 @@ export const HomePage = () => {
         setHighlightedStore
     } = useStoreLocator();
 
+    const storeRefs = useRef<Map<number, HTMLDivElement>>(new Map());
+
     useEffect(() => {
         fetchStores();
         fetchCities();
     }, []);
+
+    useEffect(() => {
+        if (highlightedStoreId !== null) {
+            const cardElement = storeRefs.current.get(highlightedStoreId);
+            if (cardElement) {
+                cardElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'nearest'
+                });
+            }
+        }
+    }, [highlightedStoreId]);
 
     if (isLoading && stores.length === 0) {
         return <Loader />;
@@ -73,6 +87,13 @@ export const HomePage = () => {
                         stores.map((store) => (
                             <div
                                 key={store.id}
+                                ref={el => {
+                                    if (el) {
+                                        storeRefs.current.set(store.id, el);
+                                    } else {
+                                        storeRefs.current.delete(store.id);
+                                    }
+                                }}
                                 className={`card hover:shadow-lg transition-shadow cursor-pointer ${highlightedStoreId === store.id
                                     ? "ring-2 ring-blue-500 bg-blue-50"
                                     : ""
