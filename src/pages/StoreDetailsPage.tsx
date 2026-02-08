@@ -57,7 +57,7 @@ export const StoreDetailsPage = () => {
                 ← Torna alla lista
             </Link>
 
-            <div className="flex flex-col lg:flex-row gap-6">
+            <div className="flex flex-col lg:flex-row gap-4 h-[calc(100vh-140px)]">
                 {/* Dettagli negozio */}
                 <div className="w-full lg:w-1/2">
                     <div className="card">
