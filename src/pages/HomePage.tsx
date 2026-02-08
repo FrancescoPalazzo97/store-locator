@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useStoreLocator } from "../stores/useStoreLocator"
 import { Loader } from "../components/common/Loader";
 import { Link } from "react-router-dom";
+import { StoreMap } from "../components/map/StoreMap";
 
 export const HomePage = () => {
     const {
@@ -103,11 +104,11 @@ export const HomePage = () => {
 
             {/* Mappa placeholder */}
             <main className="flex-1 bg-gray-200 rounded-lg flex items-center justify-center min-h-75 lg:min-h-0">
-                <div className="text-center text-gray-500">
-                    <p className="text-4xl mb-2">🗺️</p>
-                    <p>Leaflet Map</p>
-                    <p className="text-sm">(da implementare)</p>
-                </div>
+                <StoreMap
+                    stores={stores}
+                    highlightedStoreId={highlightedStoreId}
+                    onMarkerClick={(storeId) => setHighlightedStore(storeId)}
+                />
             </main>
         </div>
     )
