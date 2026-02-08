@@ -1,6 +1,7 @@
 import { SearchBar } from "../filters/SearchBar";
 import { CityFilter } from "../CityFilter";
 import { StoreList } from "../StoresList";
+import { Pagination } from "../common/Pagination";
 
 export const SideBar = () => {
 
@@ -10,6 +11,8 @@ export const SideBar = () => {
             <CityFilter />
 
             <SearchBar />
+
+            <Pagination />
 
             <StoreList />
         </aside>
