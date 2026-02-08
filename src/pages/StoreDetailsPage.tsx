@@ -2,6 +2,7 @@ import { Link, useParams } from "react-router-dom";
 import { useStoreLocator } from "../stores/useStoreLocator";
 import { useEffect } from "react";
 import { Loader } from "../components/common/Loader";
+import { StoreDetailsMap } from "../components/map/StoreDetailsMap";
 
 export const StoreDetailsPage = () => {
     const { id } = useParams<{ id: string }>();
@@ -122,14 +123,7 @@ export const StoreDetailsPage = () => {
 
                 {/* Mappa placeholder */}
                 <div className="w-full lg:w-1/2 h-80 lg:h-auto min-h-75 bg-gray-200 rounded-lg flex items-center justify-center">
-                    <div className="text-center text-gray-500">
-                        <p className="text-4xl mb-2">🗺️</p>
-                        <p>Leaflet Map</p>
-                        <p className="text-sm">(da implementare)</p>
-                        <p className="text-xs mt-2">
-                            Lat: {selectedStore.latitudine}, Lng: {selectedStore.longitudine}
-                        </p>
-                    </div>
+                    <StoreDetailsMap store={selectedStore} />
                 </div>
             </div>
         </div>
