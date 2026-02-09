@@ -21,7 +21,7 @@ export const SideBar = () => {
     ].filter(Boolean).length;
 
     return (
-        <aside className="w-full lg:w-1/3 flex flex-col gap-4 overflow-hidden">
+        <aside className="w-full lg:w-1/3 flex flex-col gap-4 flex-1 min-h-0 overflow-hidden">
             {/* Toggle filtri - solo mobile */}
             <button
                 onClick={() => setFiltersOpen(!filtersOpen)}

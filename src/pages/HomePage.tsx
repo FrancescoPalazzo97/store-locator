@@ -32,7 +32,7 @@ export const HomePage = () => {
         <div className="flex flex-col-reverse lg:flex-row gap-1 h-[calc(100vh-130px)]">
             <SideBar />
 
-            <main className="flex-1 h-64 lg:h-auto min-h-0 rounded-lg">
+            <main className="h-64 shrink-0 lg:h-auto lg:shrink lg:flex-1 min-h-0 rounded-lg">
                 <StoreMap />
             </main>
         </div>
