@@ -23,8 +23,8 @@ const defaultIcon = new L.Icon({
 });
 
 const highlightedIcon = new L.Icon({
-    iconUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png",
-    iconRetinaUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png",
+    iconUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-orange.png",
+    iconRetinaUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-orange.png",
     shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
     iconSize: [25, 41],
     iconAnchor: [12, 41],
@@ -71,8 +71,8 @@ export const StoreMap = () => {
                     <Popup>
                         <div className="min-w-45">
                             <h3 className="font-semibold text-sm">{store.nome}</h3>
-                            <p className="text-xs text-gray-600 mt-1">{store.indirizzo}</p>
-                            <p className="text-xs text-gray-500">{store.città}</p>
+                            <p className="text-xs text-gray-500 mt-1">{store.indirizzo}</p>
+                            <p className="text-xs text-gray-400">{store.città}</p>
                             {store.totem && (
                                 <span className="inline-block text-xs bg-green-100 text-green-800 px-1.5 py-0.5 rounded-full mt-1">
                                     Totem
@@ -80,7 +80,7 @@ export const StoreMap = () => {
                             )}
                             <Link
                                 to={`/store/${store.id}`}
-                                className="block text-xs text-blue-600 hover:underline mt-2"
+                                className="block text-xs text-primary hover:underline mt-2"
                             >
                                 Vedi dettagli →
                             </Link>

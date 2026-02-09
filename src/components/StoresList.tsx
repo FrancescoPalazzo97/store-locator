@@ -60,10 +60,10 @@ export const StoreList = () => {
             {stores.length === 0 ? (
                 <div className="text-center py-8 px-4">
                     <p className="text-4xl mb-3">🔍</p>
-                    <p className="text-gray-700 font-medium mb-1">
+                    <p className="text-dark-text font-medium mb-1">
                         Nessun negozio trovato
                     </p>
-                    <p className="text-sm text-gray-500 mb-4">
+                    <p className="text-sm text-dark-text-secondary mb-4">
                         Prova a modificare i filtri di ricerca
                     </p>
                     <button
@@ -84,8 +84,8 @@ export const StoreList = () => {
                                 storeRefs.current.delete(store.id);
                             }
                         }}
-                        className={`p-4 border-b border-gray-200 hover:bg-gray-50 transition-all duration-200 cursor-pointer ${highlightedStoreId === store.id
-                            ? "ring-2 ring-blue-500 bg-blue-50"
+                        className={`p-4 border-b border-dark-border hover:bg-dark-surface-hover transition-all duration-200 cursor-pointer ${highlightedStoreId === store.id
+                            ? "ring-2 ring-primary bg-dark-surface"
                             : ""
                             }`}
                         onMouseEnter={() => setHighlightedStore(store.id)}
@@ -93,17 +93,17 @@ export const StoreList = () => {
                     >
                         <div className="flex items-start justify-between">
                             <div className="min-w-0 flex-1">
-                                <h3 className="font-semibold text-gray-900">{store.nome}</h3>
-                                <p className="text-sm text-gray-500 mt-1">{store.indirizzo}, {store.città}</p>
+                                <h3 className="font-semibold text-dark-text">{store.nome}</h3>
+                                <p className="text-sm text-dark-text-secondary mt-1">{store.indirizzo}, {store.città}</p>
                                 {store.totem && (
-                                    <span className="inline-block text-xs text-green-700 bg-green-50 px-2 py-0.5 rounded-full mt-2">
+                                    <span className="inline-block text-xs text-accent-green bg-accent-green/15 px-2 py-0.5 rounded-full mt-2">
                                         Totem
                                     </span>
                                 )}
                             </div>
                             <Link
                                 to={`/store/${store.id}`}
-                                className="text-gray-400 hover:text-blue-600 ml-3 mt-1 shrink-0"
+                                className="text-dark-text-secondary hover:text-primary ml-3 mt-1 shrink-0"
                                 onClick={e => e.stopPropagation()}
                             >
                                 <ChevronRightIcon className="w-5 h-5" />

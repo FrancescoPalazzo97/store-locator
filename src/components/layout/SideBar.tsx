@@ -30,7 +30,7 @@ export const SideBar = () => {
                 <span>
                     Filtri
                     {activeFilterCount > 0 && (
-                        <span className="ml-2 inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-blue-600 rounded-full">
+                        <span className="ml-2 inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-primary rounded-full">
                             {activeFilterCount}
                         </span>
                     )}
@@ -50,7 +50,7 @@ export const SideBar = () => {
             <Pagination />
 
             {totalPages <= 1 && totalItems > 0 && (
-                <p className="text-xs text-gray-500 px-2">
+                <p className="text-xs text-dark-text-secondary px-2">
                     {totalItems} negozi trovati
                 </p>
             )}

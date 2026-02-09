@@ -12,7 +12,7 @@ export const CityFilter = () => {
                 aria-label="Filtra per città"
                 value={selectedCity || ""}
                 onChange={(e) => setSelectedCity(e.target.value || null)}
-                className="w-full px-3 py-2 min-h-11 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full px-3 py-2 min-h-11 bg-dark-bg border border-dark-border text-dark-text rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
             >
                 <option value="">Tutte le città</option>
                 {cities.map((city) => (

@@ -12,18 +12,18 @@ export const TotemFilter = () => {
 
     return (
         <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-dark-text-secondary mb-2">
                 Totem
             </label>
-            <div className="flex rounded-lg border border-gray-300 overflow-hidden">
+            <div className="flex rounded-lg border border-dark-border overflow-hidden">
                 {options.map((option) => (
                     <button
                         key={String(option.value)}
                         onClick={() => setSelectedTotem(option.value)}
                         className={`flex-1 px-3 py-2 text-sm font-medium transition-colors cursor-pointer ${
                             selectedTotem === option.value
-                                ? "bg-blue-600 text-white"
-                                : "bg-white text-gray-700 hover:bg-gray-50"
+                                ? "bg-primary text-white"
+                                : "bg-dark-bg text-dark-text-secondary hover:bg-dark-surface-hover"
                         }`}
                     >
                         {option.label}

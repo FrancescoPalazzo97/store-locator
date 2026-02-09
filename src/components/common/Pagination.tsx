@@ -27,7 +27,7 @@ export const Pagination = () => {
 
     return (
         <div className="flex items-center justify-between px-2 py-3">
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-dark-text-secondary">
                 {totalItems} negozi trovati
             </p>
 
@@ -35,14 +35,14 @@ export const Pagination = () => {
                 <button
                     onClick={() => fetchStores(currentPage - 1)}
                     disabled={currentPage <= 1}
-                    className="min-w-10 min-h-10 text-sm rounded border border-gray-300 hover:bg-gray-100 disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
+                    className="min-w-10 min-h-10 text-sm rounded border border-dark-border text-dark-text hover:bg-dark-surface-hover disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
                 >
                     &larr;
                 </button>
 
                 {visiblePages.map((page, index) =>
                     page === "..." ? (
-                        <span key={`ellipsis-${index}`} className="min-w-10 min-h-10 flex items-center justify-center text-sm text-gray-400">
+                        <span key={`ellipsis-${index}`} className="min-w-10 min-h-10 flex items-center justify-center text-sm text-dark-text-secondary">
                             ...
                         </span>
                     ) : (
@@ -50,8 +50,8 @@ export const Pagination = () => {
                             key={page}
                             onClick={() => fetchStores(page)}
                             className={`min-w-10 min-h-10 text-sm rounded border cursor-pointer ${page === currentPage
-                                ? "bg-blue-600 text-white border-blue-600"
-                                : "border-gray-300 hover:bg-gray-100"
+                                ? "bg-primary text-white border-primary"
+                                : "border-dark-border text-dark-text hover:bg-dark-surface-hover"
                                 }`}
                         >
                             {page}
@@ -62,7 +62,7 @@ export const Pagination = () => {
                 <button
                     onClick={() => fetchStores(currentPage + 1)}
                     disabled={currentPage >= totalPages}
-                    className="min-w-10 min-h-10 text-sm rounded border border-gray-300 hover:bg-gray-100 disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
+                    className="min-w-10 min-h-10 text-sm rounded border border-dark-border text-dark-text hover:bg-dark-surface-hover disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
                 >
                     &rarr;
                 </button>

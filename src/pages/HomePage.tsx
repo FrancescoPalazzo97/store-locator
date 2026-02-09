@@ -15,7 +15,7 @@ export const HomePage = () => {
 
     if (error) {
         return (
-            <div className="p-4 bg-red-50 text-red-600 rounded-lg">
+            <div className="p-4 bg-accent-red/15 text-accent-red rounded-lg">
                 <p className="font-semibold">Errore</p>
                 <p>{error}</p>
                 <button

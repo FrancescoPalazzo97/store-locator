@@ -31,32 +31,32 @@ const MonitorIcon = ({ className }: { className?: string }) => (
 
 const StoreDetailSkeleton = () => (
     <div className="max-w-7xl mx-auto p-4 lg:p-6 w-full">
-        <div className="h-10 bg-gray-200 rounded-lg w-40 mb-4 animate-pulse"></div>
+        <div className="h-10 bg-dark-surface-hover rounded-lg w-40 mb-4 animate-pulse"></div>
         <div className="flex flex-col lg:flex-row gap-6">
             <div className="w-full lg:w-2/5">
                 <div className="card animate-pulse space-y-4">
-                    <div className="h-7 bg-gray-200 rounded w-3/4"></div>
+                    <div className="h-7 bg-dark-surface-hover rounded w-3/4"></div>
                     <div className="space-y-3">
                         <div className="flex items-center gap-3">
-                            <div className="w-5 h-5 bg-gray-200 rounded shrink-0"></div>
-                            <div className="h-4 bg-gray-200 rounded w-full"></div>
+                            <div className="w-5 h-5 bg-dark-surface-hover rounded shrink-0"></div>
+                            <div className="h-4 bg-dark-surface-hover rounded w-full"></div>
                         </div>
                         <div className="flex items-center gap-3">
-                            <div className="w-5 h-5 bg-gray-200 rounded shrink-0"></div>
-                            <div className="h-4 bg-gray-200 rounded w-2/3"></div>
+                            <div className="w-5 h-5 bg-dark-surface-hover rounded shrink-0"></div>
+                            <div className="h-4 bg-dark-surface-hover rounded w-2/3"></div>
                         </div>
                         <div className="flex items-center gap-3">
-                            <div className="w-5 h-5 bg-gray-200 rounded shrink-0"></div>
-                            <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+                            <div className="w-5 h-5 bg-dark-surface-hover rounded shrink-0"></div>
+                            <div className="h-4 bg-dark-surface-hover rounded w-1/2"></div>
                         </div>
                     </div>
                     <div className="flex gap-3 pt-2">
-                        <div className="h-11 bg-gray-200 rounded-lg flex-1"></div>
-                        <div className="h-11 bg-gray-200 rounded-lg flex-1"></div>
+                        <div className="h-11 bg-dark-surface-hover rounded-lg flex-1"></div>
+                        <div className="h-11 bg-dark-surface-hover rounded-lg flex-1"></div>
                     </div>
                 </div>
             </div>
-            <div className="w-full lg:w-3/5 h-64 lg:h-auto bg-gray-200 rounded-lg animate-pulse"></div>
+            <div className="w-full lg:w-3/5 h-64 lg:h-auto bg-dark-surface-hover rounded-lg animate-pulse"></div>
         </div>
     </div>
 );
@@ -88,7 +88,7 @@ export const StoreDetailsPage = () => {
                     <ArrowLeftIcon className="w-4 h-4" />
                     Torna alla lista
                 </Link>
-                <div className="p-4 bg-red-50 text-red-600 rounded-lg">
+                <div className="p-4 bg-accent-red/15 text-accent-red rounded-lg">
                     <p className="font-semibold">Errore</p>
                     <p>{error}</p>
                 </div>
@@ -103,7 +103,7 @@ export const StoreDetailsPage = () => {
                     <ArrowLeftIcon className="w-4 h-4" />
                     Torna alla lista
                 </Link>
-                <p className="text-gray-500">Negozio non trovato</p>
+                <p className="text-dark-text-secondary">Negozio non trovato</p>
             </div>
         );
     }
@@ -123,27 +123,27 @@ export const StoreDetailsPage = () => {
                 {/* Store info card */}
                 <div className="w-full lg:w-2/5">
                     <div className="card">
-                        <h1 className="text-xl font-bold text-gray-900">
+                        <h1 className="text-xl font-bold text-dark-text">
                             {selectedStore.nome}
                         </h1>
 
                         <div className="space-y-3 mt-4">
                             {/* Address */}
                             <div className="flex items-start gap-3">
-                                <MapPinIcon className="w-5 h-5 text-gray-400 mt-0.5 shrink-0" />
+                                <MapPinIcon className="w-5 h-5 text-dark-text-secondary mt-0.5 shrink-0" />
                                 <div>
-                                    <p className="text-gray-800">{selectedStore.indirizzo}</p>
-                                    <p className="text-gray-500 text-sm">{selectedStore.città}</p>
+                                    <p className="text-dark-text">{selectedStore.indirizzo}</p>
+                                    <p className="text-dark-text-secondary text-sm">{selectedStore.città}</p>
                                 </div>
                             </div>
 
                             {/* Phone */}
                             {selectedStore.telefono && (
                                 <div className="flex items-center gap-3">
-                                    <PhoneIcon className="w-5 h-5 text-gray-400 shrink-0" />
+                                    <PhoneIcon className="w-5 h-5 text-dark-text-secondary shrink-0" />
                                     <a
                                         href={`tel:${selectedStore.telefono}`}
-                                        className="text-blue-600 hover:underline"
+                                        className="text-primary hover:underline"
                                     >
                                         {selectedStore.telefono}
                                     </a>
@@ -152,13 +152,13 @@ export const StoreDetailsPage = () => {
 
                             {/* Totem */}
                             <div className="flex items-center gap-3">
-                                <MonitorIcon className="w-5 h-5 text-gray-400 shrink-0" />
-                                <span className="text-gray-800">
+                                <MonitorIcon className="w-5 h-5 text-dark-text-secondary shrink-0" />
+                                <span className="text-dark-text">
                                     Totem:{" "}
                                     {selectedStore.totem ? (
-                                        <span className="text-green-600 font-medium">Disponibile</span>
+                                        <span className="text-accent-green font-medium">Disponibile</span>
                                     ) : (
-                                        <span className="text-gray-500">Non disponibile</span>
+                                        <span className="text-dark-text-secondary">Non disponibile</span>
                                     )}
                                 </span>
                             </div>
