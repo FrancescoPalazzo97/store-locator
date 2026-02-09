@@ -16,6 +16,7 @@ type StoreLocatorState = {
     // Filters
     selectedCity: string | null;
     searchQuery: string;
+    selectedTotem: boolean | null;
 
     // UI State
     isLoading: boolean;
@@ -29,6 +30,7 @@ type StoreLocatorActions = {
     fetchCities: () => Promise<void>;
     setSelectedCity: (city: string | null) => void;
     setSearchQuery: (query: string) => void;
+    setSelectedTotem: (totem: boolean | null) => void;
     setHighlightedStore: (id: number | null) => void;
     clearSelectedStore: () => void;
     clearError: () => void;
@@ -43,6 +45,7 @@ const initialState = {
     totalItems: 0,
     selectedCity: null,
     searchQuery: "",
+    selectedTotem: null,
     isLoading: false,
     error: null,
     highlightedStoreId: null,
@@ -58,11 +61,12 @@ export const useStoreLocator = create<StoreLocator>((set, get) => ({
     fetchStores: async (page = 1) => {
         set({ isLoading: true, error: null });
 
-        const { selectedCity, searchQuery } = get();
+        const { selectedCity, searchQuery, selectedTotem } = get();
 
         const res = await getStores({
             città: selectedCity || undefined,
             nome: searchQuery || undefined,
+            totem: selectedTotem ?? undefined,
             page
         });
 
@@ -121,6 +125,11 @@ export const useStoreLocator = create<StoreLocator>((set, get) => ({
         searchDebounceTimer = setTimeout(() => {
             get().fetchStores();
         }, 400);
+    },
+
+    setSelectedTotem: (totem) => {
+        set({ selectedTotem: totem, currentPage: 1 });
+        get().fetchStores();
     },
 
     setHighlightedStore: (id) => {

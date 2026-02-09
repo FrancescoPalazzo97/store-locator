@@ -18,15 +18,21 @@ export const HomePage = () => {
             <div className="p-4 bg-red-50 text-red-600 rounded-lg">
                 <p className="font-semibold">Errore</p>
                 <p>{error}</p>
+                <button
+                    onClick={() => fetchStores()}
+                    className="mt-3 btn btn-primary"
+                >
+                    Riprova
+                </button>
             </div>
         );
     }
 
     return (
-        <div className="flex flex-col lg:flex-row gap-4 h-[calc(100vh-140px)]">
+        <div className="flex flex-col-reverse lg:flex-row gap-4 h-[calc(100vh-140px)]">
             <SideBar />
 
-            <main className="flex-1 bg-gray-200 rounded-lg flex items-center justify-center min-h-75 lg:min-h-0">
+            <main className="flex-1 h-64 lg:h-auto min-h-0 rounded-lg">
                 <StoreMap />
             </main>
         </div>

@@ -1,8 +1,30 @@
 import { Link, useParams } from "react-router-dom";
 import { useStoreLocator } from "../stores/useStoreLocator";
 import { useEffect } from "react";
-import { Loader } from "../components/common/Loader";
 import { StoreDetailsMap } from "../components/map/StoreDetailsMap";
+
+const StoreDetailSkeleton = () => (
+    <div className="max-w-6xl mx-auto">
+        <div className="h-4 bg-gray-200 rounded w-32 mb-4 animate-pulse"></div>
+        <div className="flex flex-col lg:flex-row gap-4 h-[calc(100vh-140px)]">
+            <div className="w-full lg:w-1/2">
+                <div className="card animate-pulse space-y-4">
+                    <div className="h-7 bg-gray-200 rounded w-3/4"></div>
+                    <div className="space-y-3">
+                        <div className="h-4 bg-gray-200 rounded w-full"></div>
+                        <div className="h-4 bg-gray-200 rounded w-2/3"></div>
+                        <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+                    </div>
+                    <div className="flex gap-3 mt-4">
+                        <div className="h-10 bg-gray-200 rounded-lg w-28"></div>
+                        <div className="h-10 bg-gray-200 rounded-lg w-28"></div>
+                    </div>
+                </div>
+            </div>
+            <div className="w-full lg:w-1/2 h-64 lg:h-auto bg-gray-200 rounded-lg animate-pulse"></div>
+        </div>
+    </div>
+);
 
 export const StoreDetailsPage = () => {
     const { id } = useParams<{ id: string }>();
@@ -21,7 +43,7 @@ export const StoreDetailsPage = () => {
     }, [id]);
 
     if (isLoading) {
-        return <Loader />;
+        return <StoreDetailSkeleton />;
     }
 
     if (error) {
@@ -103,9 +125,9 @@ export const StoreDetailsPage = () => {
                         </div>
 
                         {/* Bottoni azione */}
-                        <div className="flex flex-wrap gap-3 mt-6">
+                        <div className="flex flex-col sm:flex-row gap-3 mt-6">
                             {selectedStore.telefono && (
-                                <a href={`tel:${selectedStore.telefono}`} className="btn btn-primary">
+                                <a href={`tel:${selectedStore.telefono}`} className="btn btn-primary text-center">
                                     📞 Chiama
                                 </a>
                             )}
@@ -113,7 +135,7 @@ export const StoreDetailsPage = () => {
                                 href={googleMapsUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="btn btn-secondary"
+                                className="btn btn-secondary text-center"
                             >
                                 🗺️ Indicazioni
                             </a>
@@ -122,7 +144,7 @@ export const StoreDetailsPage = () => {
                 </div>
 
                 {/* Mappa placeholder */}
-                <div className="w-full lg:w-1/2 h-80 lg:h-auto min-h-75 bg-gray-200 rounded-lg flex items-center justify-center">
+                <div className="w-full lg:w-1/2 h-64 lg:h-auto min-h-0 rounded-lg">
                     <StoreDetailsMap store={selectedStore} />
                 </div>
             </div>

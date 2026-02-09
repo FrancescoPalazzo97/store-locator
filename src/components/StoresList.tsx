@@ -1,16 +1,21 @@
 import { useEffect, useRef } from "react";
 import { useStoreLocator } from "../stores/useStoreLocator";
 import { Link } from "react-router-dom";
-import { Loader } from "./common/Loader";
+import { StoreCardSkeleton } from "./common/StoreCardSkeleton";
 
 export const StoreList = () => {
     const stores = useStoreLocator(s => s.stores);
     const highlightedStoreId = useStoreLocator(s => s.highlightedStoreId);
     const isLoading = useStoreLocator(s => s.isLoading);
     const setHighlightedStore = useStoreLocator(s => s.setHighlightedStore);
+    const setSelectedCity = useStoreLocator(s => s.setSelectedCity);
+    const setSearchQuery = useStoreLocator(s => s.setSearchQuery);
+    const setSelectedTotem = useStoreLocator(s => s.setSelectedTotem);
 
     const storeRefs = useRef<Map<number, HTMLDivElement>>(new Map());
+    const listRef = useRef<HTMLDivElement>(null);
 
+    // Scroll to highlighted card
     useEffect(() => {
         if (highlightedStoreId !== null) {
             const cardElement = storeRefs.current.get(highlightedStoreId);
@@ -23,16 +28,45 @@ export const StoreList = () => {
         }
     }, [highlightedStoreId]);
 
+    // Scroll to top when stores change (new page/filter)
+    useEffect(() => {
+        listRef.current?.scrollTo({ top: 0, behavior: "smooth" });
+    }, [stores]);
+
     if (isLoading) {
-        return <Loader />;
+        return (
+            <div className="flex-1 overflow-y-auto space-y-2">
+                {Array.from({ length: 5 }).map((_, i) => (
+                    <StoreCardSkeleton key={i} />
+                ))}
+            </div>
+        );
     }
 
+    const handleResetFilters = () => {
+        setSelectedCity(null);
+        setSearchQuery("");
+        setSelectedTotem(null);
+    };
+
     return (
-        <div className="flex-1 overflow-y-auto space-y-2">
+        <div ref={listRef} className="flex-1 overflow-y-auto space-y-2">
             {stores.length === 0 ? (
-                <p className="text-gray-500 text-center py-4">
-                    Nessun negozio trovato
-                </p>
+                <div className="text-center py-8 px-4">
+                    <p className="text-4xl mb-3">🔍</p>
+                    <p className="text-gray-700 font-medium mb-1">
+                        Nessun negozio trovato
+                    </p>
+                    <p className="text-sm text-gray-500 mb-4">
+                        Prova a modificare i filtri di ricerca
+                    </p>
+                    <button
+                        onClick={handleResetFilters}
+                        className="btn btn-secondary text-sm"
+                    >
+                        Resetta filtri
+                    </button>
+                </div>
             ) : (
                 stores.map((store) => (
                     <div
@@ -44,7 +78,7 @@ export const StoreList = () => {
                                 storeRefs.current.delete(store.id);
                             }
                         }}
-                        className={`card hover:shadow-lg transition-shadow cursor-pointer ${highlightedStoreId === store.id
+                        className={`card hover:shadow-lg active:bg-gray-50 transition-all duration-200 cursor-pointer ${highlightedStoreId === store.id
                             ? "ring-2 ring-blue-500 bg-blue-50"
                             : ""
                             }`}
@@ -62,7 +96,7 @@ export const StoreList = () => {
                             )}
                             <Link
                                 to={`/store/${store.id}`}
-                                className="text-sm text-blue-600 hover:underline ml-auto"
+                                className="text-sm text-blue-600 hover:underline ml-auto py-2"
                             >
                                 Dettagli →
                             </Link>
