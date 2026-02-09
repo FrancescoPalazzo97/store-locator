@@ -119,7 +119,12 @@ export const StoreDetailsPage = () => {
             </Link>
 
             {/* Content: side-by-side on desktop, stacked on mobile */}
-            <div className="flex flex-col-reverse lg:flex-row gap-6 flex-1 min-h-0">
+            <div className="flex flex-col lg:flex-row gap-6 flex-1 min-h-0">
+                {/* Map */}
+                <div className="w-full lg:w-3/5 h-64 lg:h-auto min-h-64 rounded-lg overflow-hidden">
+                    <StoreDetailsMap store={selectedStore} />
+                </div>
+
                 {/* Store info card */}
                 <div className="w-full lg:w-2/5">
                     <div className="card">
@@ -184,11 +189,6 @@ export const StoreDetailsPage = () => {
                             )}
                         </div>
                     </div>
-                </div>
-
-                {/* Map */}
-                <div className="w-full lg:w-3/5 h-64 lg:h-auto min-h-64 rounded-lg overflow-hidden">
-                    <StoreDetailsMap store={selectedStore} />
                 </div>
             </div>
         </div>
