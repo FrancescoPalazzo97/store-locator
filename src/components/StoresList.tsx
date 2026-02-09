@@ -3,6 +3,12 @@ import { useStoreLocator } from "../stores/useStoreLocator";
 import { Link } from "react-router-dom";
 import { StoreCardSkeleton } from "./common/StoreCardSkeleton";
 
+const ChevronRightIcon = ({ className }: { className?: string }) => (
+    <svg className={className} fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+    </svg>
+);
+
 export const StoreList = () => {
     const stores = useStoreLocator(s => s.stores);
     const highlightedStoreId = useStoreLocator(s => s.highlightedStoreId);
@@ -35,7 +41,7 @@ export const StoreList = () => {
 
     if (isLoading) {
         return (
-            <div className="flex-1 overflow-y-auto space-y-2">
+            <div className="flex-1 overflow-y-auto">
                 {Array.from({ length: 5 }).map((_, i) => (
                     <StoreCardSkeleton key={i} />
                 ))}
@@ -50,7 +56,7 @@ export const StoreList = () => {
     };
 
     return (
-        <div ref={listRef} className="flex-1 overflow-y-auto space-y-2">
+        <div ref={listRef} className="flex-1 overflow-y-auto">
             {stores.length === 0 ? (
                 <div className="text-center py-8 px-4">
                     <p className="text-4xl mb-3">🔍</p>
@@ -78,27 +84,29 @@ export const StoreList = () => {
                                 storeRefs.current.delete(store.id);
                             }
                         }}
-                        className={`card hover:shadow-lg active:bg-gray-50 transition-all duration-200 cursor-pointer ${highlightedStoreId === store.id
+                        className={`p-4 border-b border-gray-200 hover:bg-gray-50 transition-all duration-200 cursor-pointer ${highlightedStoreId === store.id
                             ? "ring-2 ring-blue-500 bg-blue-50"
                             : ""
                             }`}
                         onMouseEnter={() => setHighlightedStore(store.id)}
                         onMouseLeave={() => setHighlightedStore(null)}
                     >
-                        <h3 className="font-semibold text-gray-900">{store.nome}</h3>
-                        <p className="text-sm text-gray-600">{store.indirizzo}</p>
-                        <p className="text-sm text-gray-500">{store.città}</p>
-                        <div className="flex items-center justify-between mt-2">
-                            {store.totem && (
-                                <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">
-                                    Totem disponibile
-                                </span>
-                            )}
+                        <div className="flex items-start justify-between">
+                            <div className="min-w-0 flex-1">
+                                <h3 className="font-semibold text-gray-900">{store.nome}</h3>
+                                <p className="text-sm text-gray-500 mt-1">{store.indirizzo}, {store.città}</p>
+                                {store.totem && (
+                                    <span className="inline-block text-xs text-green-700 bg-green-50 px-2 py-0.5 rounded-full mt-2">
+                                        Totem
+                                    </span>
+                                )}
+                            </div>
                             <Link
                                 to={`/store/${store.id}`}
-                                className="text-sm text-blue-600 hover:underline ml-auto py-2"
+                                className="text-gray-400 hover:text-blue-600 ml-3 mt-1 shrink-0"
+                                onClick={e => e.stopPropagation()}
                             >
-                                Dettagli →
+                                <ChevronRightIcon className="w-5 h-5" />
                             </Link>
                         </div>
                     </div>

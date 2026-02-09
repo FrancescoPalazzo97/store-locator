@@ -29,7 +29,7 @@ export const HomePage = () => {
     }
 
     return (
-        <div className="flex flex-col-reverse lg:flex-row gap-4 h-[calc(100vh-140px)]">
+        <div className="flex flex-col-reverse lg:flex-row gap-1 h-[calc(100vh-120px)]">
             <SideBar />
 
             <main className="flex-1 h-64 lg:h-auto min-h-0 rounded-lg">
