@@ -17,7 +17,7 @@ export const SearchBar = ({ placeholder = 'Cerca negozio...' }: SearchBarProps) 
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder={placeholder}
-                    className="w-full px-3 py-2 min-h-11 bg-dark-bg border border-dark-border text-dark-text placeholder-dark-text-secondary rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
+                    className="input-field min-h-11"
                 />
             </label>
         </div>

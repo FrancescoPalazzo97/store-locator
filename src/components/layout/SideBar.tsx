@@ -40,7 +40,7 @@ export const SideBar = () => {
 
             {/* Filtri - collassabili su mobile, sempre visibili su desktop */}
             <div className={`${filtersOpen ? "block" : "hidden"} lg:block`}>
-                <div className="card space-y-3">
+                <div className="glass-panel p-4 space-y-4">
                     <CityFilter />
                     <TotemFilter />
                     <SearchBar />

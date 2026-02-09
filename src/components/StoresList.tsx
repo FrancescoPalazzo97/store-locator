@@ -74,43 +74,46 @@ export const StoreList = () => {
                     </button>
                 </div>
             ) : (
-                stores.map((store) => (
-                    <div
-                        key={store.id}
-                        ref={el => {
-                            if (el) {
-                                storeRefs.current.set(store.id, el);
-                            } else {
-                                storeRefs.current.delete(store.id);
-                            }
-                        }}
-                        className={`p-4 border-b border-dark-border hover:bg-dark-surface-hover transition-all duration-200 cursor-pointer ${highlightedStoreId === store.id
-                            ? "ring-2 ring-primary bg-dark-surface"
-                            : ""
-                            }`}
-                        onMouseEnter={() => setHighlightedStore(store.id)}
-                        onMouseLeave={() => setHighlightedStore(null)}
-                    >
-                        <div className="flex items-start justify-between">
-                            <div className="min-w-0 flex-1">
-                                <h3 className="font-semibold text-dark-text">{store.nome}</h3>
-                                <p className="text-sm text-dark-text-secondary mt-1">{store.indirizzo}, {store.città}</p>
-                                {store.totem && (
-                                    <span className="inline-block text-xs text-accent-green bg-accent-green/15 px-2 py-0.5 rounded-full mt-2">
-                                        Totem
-                                    </span>
-                                )}
+                <div className="flex flex-col gap-3 p-3">
+                    {stores.map((store) => (
+                        <div
+                            key={store.id}
+                            ref={el => {
+                                if (el) {
+                                    storeRefs.current.set(store.id, el);
+                                } else {
+                                    storeRefs.current.delete(store.id);
+                                }
+                            }}
+                            className={`p-4 rounded-xl border transition-all duration-200 cursor-pointer group ${highlightedStoreId === store.id
+                                ? "bg-dark-surface border-primary ring-1 ring-primary shadow-lg shadow-primary/10"
+                                : "bg-dark-surface border-dark-border hover:border-dark-text-secondary/50 hover:shadow-md"
+                                }`}
+                            onMouseEnter={() => setHighlightedStore(store.id)}
+                            onMouseLeave={() => setHighlightedStore(null)}
+                            onClick={() => setHighlightedStore(store.id)}
+                        >
+                            <div className="flex items-start justify-between">
+                                <div className="min-w-0 flex-1">
+                                    <h3 className="font-semibold text-dark-text group-hover:text-primary transition-colors">{store.nome}</h3>
+                                    <p className="text-sm text-dark-text-secondary mt-1">{store.indirizzo}, {store.città}</p>
+                                    {store.totem && (
+                                        <span className="inline-block text-xs font-medium text-accent-green bg-accent-green/10 border border-accent-green/20 px-2 py-0.5 rounded-full mt-2">
+                                            Totem
+                                        </span>
+                                    )}
+                                </div>
+                                <Link
+                                    to={`/store/${store.id}`}
+                                    className="text-dark-text-secondary hover:text-white bg-dark-bg p-1.5 rounded-lg transition-colors ml-3 mt-1 shrink-0"
+                                    onClick={e => e.stopPropagation()}
+                                >
+                                    <ChevronRightIcon className="w-5 h-5" />
+                                </Link>
                             </div>
-                            <Link
-                                to={`/store/${store.id}`}
-                                className="text-dark-text-secondary hover:text-primary ml-3 mt-1 shrink-0"
-                                onClick={e => e.stopPropagation()}
-                            >
-                                <ChevronRightIcon className="w-5 h-5" />
-                            </Link>
                         </div>
-                    </div>
-                ))
+                    ))}
+                </div>
             )}
         </div>
     );
